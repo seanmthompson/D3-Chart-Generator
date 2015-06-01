@@ -9,3 +9,6 @@ To install:
 3. For LESS build files: grunt less
 
 Run on a local server. 
+
+
+DEMO: http://private.seanmthompson.com/chart-generator
