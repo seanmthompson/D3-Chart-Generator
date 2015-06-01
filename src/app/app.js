@@ -15,29 +15,29 @@ var app = angular.module('app', [
         controller: 'ParentController',        
         views: {
 	        'sidebar': {
-		        templateUrl: '/src/app/shared/sidebar/sidebarView.html',
+		        templateUrl: 'src/app/shared/sidebar/sidebarView.html',
 		        controller: 'SidebarController'
 	        },
 	        'charts': {
 		        controller: 'ChartsController',
-				templateUrl: '/src/app/components/charts/chartsView.html',
+				templateUrl: 'src/app/components/charts/chartsView.html',
 	        }
         }
     })
 
     .state('charts.donut', {
         url: '/donut',
-        templateUrl: '/src/app/components/donut/donutView.html',
+        templateUrl: 'src/app/components/donut/donutView.html',
         controller: 'DonutController'
     })
     .state('charts.bar', {
 		url: '/bar',
-  		templateUrl: '/src/app/components/bar/barView.html',
+  		templateUrl: 'src/app/components/bar/barView.html',
   		controller: 'BarController'
   	})
   	.state('charts.scatter', {
 		url: '/scatter',  
-  		templateUrl: '/src/app/components/scatter/scatterView.html',
+  		templateUrl: 'src/app/components/scatter/scatterView.html',
   		controller: 'ScatterController'
   	})
   
