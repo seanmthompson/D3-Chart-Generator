@@ -1,0 +1,19 @@
+{
+  "name": "RootMetrics-Chart-Maker",
+  "version": "0.0.0",
+  "authors": [
+    "Sean Thompson <sean.thompson@rootmetrics.com>"
+  ],
+  "description": "An internal tool for creating D3 charts and graphs",
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "angular": "~1.3.13",
+    "d3": "~3.5.5",
+    "jquery": "~2.1.3"
+  }
+}

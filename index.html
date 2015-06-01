@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="dist/css/root.css">
+        <link rel="stylesheet" href="dist/css/app.css">
+        <link rel="stylesheet" href="dist/fonts/proxima-nova-2.003-base-64.css">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+    </head>
+    <body ng-app="app">
+		<div class="chart-maker-controls" ui-view="sidebar"></div>
+		<div class="chart-maker-canvas" ui-view="charts"></div>							 
+    </body>
+    <script src="dist/js/main.min.js"></script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+	<script src="src/app/app.js"></script>
+	<script src="src/app/components/charts/chartsController.js"></script>
+	<script src="src/app/components/bar/barController.js"></script>
+	<script src="src/app/components/donut/donutController.js"></script>
+	<script src="src/app/components/scatter/scatterController.js"></script>
+	<script src="src/app/shared/sidebar/sidebarController.js"></script>
+	<script src="src/app/shared/modal/modalController.js"></script>
+	<script src="src/app/shared/colorpicker/pickerController.js"></script>
+	<script src="src/app/shared/download/downloadController.js"></script>
+</html>

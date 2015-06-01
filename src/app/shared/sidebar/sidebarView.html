@@ -1,0 +1,130 @@
+<div class="inner">
+	<div class="sidebarHeader">
+		<h2>Chart Options</h2>
+		<form>
+		  <div class="form-group no-border">
+				<label>Chart Type</label>
+		        <select ng-change="routeChange()" ng-model="GraphProperties.SelectedGraphType" ng-options="type.value as type.name for type in GraphProperties.Type"></select>
+		  </div>
+		</form>
+		<ul class="tabs">
+			<li ng-class="{'active': activeIndex==1}" ng-click="activeIndex = 1">Data</li>
+			<li ng-class="{'active': activeIndex==2}" ng-click="activeIndex = 2">Text</li>
+			<li ng-class="{'active': activeIndex==3}" ng-click="activeIndex = 3">Size</li>
+			<li ng-class="{'active': activeIndex==4}" ng-click="activeIndex = 4">Options</li>
+		</ul>
+	</div>
+	
+	<div class="sidebarBody">
+		<form id="svg_attributes" name="svg_attributes">
+		<div ng-show="activeIndex == 1" class="tab">
+			<ul class="sortableListHeader">
+				<li class="col1"></li>
+				<li class="col2">Text</li>
+				<li class="col3" ng-if="GraphProperties.SelectedGraphType == 'scatter'">X Value</li>
+				<li class="col4" ng-if="GraphProperties.SelectedGraphType == 'scatter'">Y Value</li>
+				<li class="col3" ng-if="GraphProperties.SelectedGraphType !== 'scatter'">Value</li>
+				<li class="col4" ng-if="ChartData.errorBars && GraphProperties.SelectedGraphType == 'bar'">Upper</li>
+				<li class="col5" ng-if="ChartData.errorBars && GraphProperties.SelectedGraphType == 'bar'">Lower</li>	
+				<li class="col5" ng-if="ChartData.addTies && GraphProperties.SelectedGraphType == 'bar'">Ties</li>									
+				<li class="col6"></li>
+				<li class="col7"></li>
+			</ul>
+			<ul class="dateList" ui-sortable="sortableOptions" ng-model="ChartData.values">			
+				<li class="ui-state-default" ng-repeat="item in ChartData.values">
+					<div class="dragHandle"></div> 
+					<input type="text" ng-model="item.text" value="{{ item.text }}" required>
+					<input type="number" class="small" ng-if="GraphProperties.SelectedGraphType !== 'scatter'" ng-model="item.value" value="{{ item.value }}" required>					
+					<input type="number" class="small" ng-if="ChartData.errorBars && GraphProperties.SelectedGraphType == 'bar'" ng-model="item.upper" value="{{ item.upper }}">
+					<input type="number" class="small" ng-if="ChartData.errorBars && GraphProperties.SelectedGraphType == 'bar'" ng-model="item.lower" value="{{ item.lower }}">	
+					<input type="number" class="small" ng-if="ChartData.addTies && GraphProperties.SelectedGraphType == 'bar'" ng-model="item.ties" value="{{ item.ties }}">				
+					<input type="number" class="small" ng-if="GraphProperties.SelectedGraphType == 'scatter'" required ng-model="item.scatterX" value="{{ item.scatterX }}">
+					<input type="number" class="small" ng-if="GraphProperties.SelectedGraphType == 'scatter'" required ng-model="item.scatterY" value="{{ item.scatterY }}">					
+					<span class="colorPicker" ng-click="colorPicker(item)" ng-model="item.color" ng-style="{'background': item.color }"></span>		
+					<span class="glyphicon glyphicon-remove" ng-click="removeItem($index)"></span>				
+				</li>
+			</ul>
+			<btn class="btn btn-default add-row" ng-click="addRow()"><span class="glyphicon glyphicon-plus"></span>  Add Data Row...</button>
+		</div>
+		<div ng-show="activeIndex == 2" class="tab">
+			<div class="form-group">
+				<label for="title">Title</label>
+				<input type="text" class="form-control" ng-max="36"  id="title" ng-model="ChartData.title">
+			</div>	
+			<div class="form-group">
+				<label for="title">Sub Title</label>
+				<input type="text" class="form-control" id="subtitle" ng-max="65" ng-model="ChartData.subtitle">
+			</div>	
+			<div ng-if="GraphProperties.SelectedGraphType == 'scatter'" class="form-group">
+				<label for="xTitle">X Scale Title</label>
+				<input type="text" class="form-control" id="xTitle" ng-max="65" ng-model="ChartData.scatter.xTitle">
+			</div>
+			<div ng-if="GraphProperties.SelectedGraphType == 'scatter'" class="form-group">
+				<label for="yTitle">Y Scale Title</label>
+				<input type="text" class="form-control" id="yTitle" ng-max="65" ng-model="ChartData.scatter.yTitle">
+			</div>
+		</div>
+		<div ng-show="activeIndex == 3" class="tab">			
+			<div class="form-group">
+			 <div class="col-sm-6">
+		        <label for="width">Width</label>
+		        <input ng-model="ChartData.width" class="form-control" type="number" id="width" type="text" required>
+		    </div> 
+		    <div class="col-sm-6">
+		        <label for="height">Height</label> 
+		        <input ng-model="ChartData.height" class="form-control" type="number" id="height" type="text" required>
+		    </div> 
+		    <div class="clearfix"></div>
+		  </div>
+		  	<div class="form-group" ng-if="GraphProperties.SelectedGraphType == 'donut'">
+				<div class="col-sm-12">
+					<label>Inner Donut Radius</label>
+					<input ng-model="ChartData.innerDonutRadius" id="innerDonutRadius" type="range" min="1" max="99" step="1" required>
+					<p class="text-center">{{ ChartData.innerDonutRadius }}%</p>
+		    	</div> 
+		    	<div class="clearfix"></div>
+			</div>
+			<div class="form-group" ng-if="GraphProperties.SelectedGraphType == 'scatter'">
+				<div class="col-sm-12">
+					<label>Circle Radius Size</label>
+					<input ng-model="ChartData.circleRadius" id="circleRadius" type="range" min="1" max="15" step="1" required>
+					<p class="text-center">{{ ChartData.circleRadius }}</p>
+		    	</div> 
+		    	<div class="clearfix"></div>
+			</div>	
+		</div>
+		<div ng-show="activeIndex == 4" class="tab">
+			<div class="form-group" ng-if="GraphProperties.SelectedGraphType !== 'donut'">
+				<div class="radio">
+					<input type="radio" id="100" ng-model="ChartData.useScales" value="false">
+				    <label for="100">Scale 1 to 100</label>
+				    
+					<input id="scales" type="radio" ng-model="ChartData.useScales" value="true">				    
+					<label for="scales">Use Scales?</label>														  
+				</div>				
+				<div ng-if="ChartData.useScales == 'true'">
+					<div class="col-sm-6">
+				        <label for="width">Lower Scale</label>
+				        <input ng-model="ChartData.scaleLower" class="form-control" type="number" id="lowerScale" type="text" required>
+				    </div> 
+				    <div class="col-sm-6">
+				        <label for="height">Upper Scale</label> 
+				        <input ng-model="ChartData.scaleUpper" class="form-control" type="number" id="upperScale" type="text" required>
+				    </div> 
+				    <div class="clearfix"></div>		
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="checkbox"  ng-if="GraphProperties.SelectedGraphType == 'bar'">
+			      	<input type="checkbox" id="errorBars" ng-model="ChartData.errorBars"> 
+				    <label for="errorBars">Error Bars?</label>
+				    <br/>
+				    <input type="checkbox" id="addTies" ng-model="ChartData.addTies"> 
+			  	 	<label for="addTies">Include Ties Data?</label>
+			  	</div>  
+		  </div>		  
+		</div>		
+		<button ng-disabled="svg_attributes.$invalid" ng-click="generateForm()" type="submit" class="btn btn-success btn-lg btn-block">Generate Chart</button>
+		</form>
+	</div>	 
+</div>

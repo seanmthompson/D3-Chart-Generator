@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <div class="row">
+    	<div class="col-sm-12">
+	    	<h2 class="text-center">Color Picker</h2>
+	    	<p class="colorTabs">
+		    	<a ng-class="{'active': showCarrierColors }" ng-click="showCarrierColors = true">Carriers</a> / 
+		    	<a ng-class="{'active': !showCarrierColors }" ng-click="showCarrierColors = false">RootMetrics Brand Colors</a>
+		    </p>
+    	</div>
+    </div>    
+</div>
+<div class="modal-body">
+	<div class="row" ng-show="showCarrierColors">
+		<div class="col-sm-3" ng-click="closeModal(carrier.hex)" ng-repeat="carrier in carrierColors">
+			<div class="inner">
+				<div class="color-chip" ng-style="{'background': carrier.hex }"></div>
+	            <h3>{{ carrier.carrier }}</h3>
+	            <ul class="unstyled">
+	                <li><span>Hex</span><input value="{{ carrier.hex }}" readonly></input></li>
+	            </ul>
+            </div>
+		</div>
+	</div>
+	<div class="row" ng-show="!showCarrierColors">
+		<div class="col-sm-3" ng-click="closeModal(brand.hex)" ng-repeat="brand in brandColors">
+			<div class="inner">
+				<div class="color-chip" ng-style="{'background': brand.hex }"></div>
+	            <h3>{{ brand.name }}</h3>
+	            <ul class="unstyled">
+	                <li><span>Hex</span><input value="{{ brand.hex }}" readonly></input></li>
+	            </ul>
+            </div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Cancel</button>
+</div>

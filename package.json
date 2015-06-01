@@ -1,0 +1,22 @@
+{
+  "name": "RootMetrics-Chart-Maker",
+  "version": "0.1.0",
+  "author": "Sean Thompson and Eric Pitcock",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-connect": "^0.10.1",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-cssc": "*",
+    "matchdep": "*"
+  },
+  "description": "After pulling the repo, run \"npm install\" and \"bower install\" from Terminal in the \"chart-maker\" directory, to install needed dependencies and JS libraries.",
+  "main": "gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC"
+}
